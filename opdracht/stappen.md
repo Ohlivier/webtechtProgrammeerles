@@ -1,0 +1,11 @@
+# Stappenplan
+
+- [ ] naam bedenken voor de site
+- [ ] base.html aanmaken met bootstrap functionaliteit
+- [ ] index.html aanmaken hoofdpagina van de site
+- [ ] Pagina aanmaken voor alle cursussen (Jinja batch)
+- [ ] SQLalchemy objecten voor databases aanmaken
+- [ ] WTForms objecten aanmaken
+- [ ] Flask-login leren
+- [ ] Flask Login implementeren in de website
+- [ ] Klaar!!

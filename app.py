@@ -1,8 +1,7 @@
 from flask import Flask, render_template
 from config import Config
 from forms import LoginForm
-app = Flask(__name__)
-app.config.from_object(Config)
+from . import app
 
 
 @app.route('/')

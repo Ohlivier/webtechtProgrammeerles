@@ -1,0 +1,3 @@
+class Config(object):
+
+    SECRET_KEY = 'you will never guess this'

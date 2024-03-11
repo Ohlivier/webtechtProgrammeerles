@@ -1,5 +1,4 @@
 from flask import Flask, render_template
-from config import Config
 from forms import LoginForm
 from . import app
 
@@ -11,4 +10,4 @@ def hello_world():  # put application's code here
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

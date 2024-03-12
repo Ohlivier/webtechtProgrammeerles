@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+    <div class="d-flex p-2 border-dark-subtle justify-content-center">
+        <form method="post">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">{{ form.email.label }}</label>
+                <div class="form-control">{{ form.email }}</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">{{ form.username.label }}</label>
+                <div class="form-control">{{ form.username }}</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">{{ form.password.label }}</label>
+                <div class="form-control">{{ form.password }}</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    {% for field, errors in form.errors.items() %}
+<div class="alert alert-error">
+    {{ form[field].label }}: {{ ', '.join(errors) }}
+</div>
+{% endfor %}
+{% endblock %}

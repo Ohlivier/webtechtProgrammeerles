@@ -2,7 +2,7 @@
 
 - [x] naam bedenken voor de site
 - [x] base.html aanmaken met bootstrap functionaliteit
-- [ ] index.html aanmaken hoofdpagina van de site
+- [x] index.html aanmaken hoofdpagina van de site
 - [ ] Pagina aanmaken voor alle cursussen (Jinja batch)
 - [ ] SQLalchemy objecten voor databases aanmaken
 - [ ] WTForms objecten aanmaken

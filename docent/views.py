@@ -1,5 +1,5 @@
 from flask import Blueprint
-from docent.forms import TaalForm
+from .forms import TaalForm
 docenten_blueprint = Blueprint('docenten', __name__, template_folder='templates')
 
 

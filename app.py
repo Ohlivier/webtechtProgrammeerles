@@ -1,12 +1,19 @@
-from flask import Flask, render_template
-from forms import LoginForm
 from . import app
+from flask import Flask, render_template, request
+from forms import LoginForm
 
 
-@app.route('/')
-def hello_world():  # put application's code here
+@app.route('/', methods=['GET'])
+def index():  # put application's code here
+    return render_template('index.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
     form = LoginForm()
-    return render_template('index.html', form=form)
+    if form.validate_on_submit() and request.method == 'POST':
+        return f"Username: {form.username.data}, <br> Password: {form.password.data}"
+    return render_template('login.html', form=form)
 
 
 if __name__ == '__main__':

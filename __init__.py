@@ -1,10 +1,15 @@
 from flask import Flask
-from .config import Config
-from .docent.views import docenten_blueprint
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+
+from .config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
-db = SQLAlchemy()
-app.register_blueprint(docenten_blueprint, url_prefix='/docenten')
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+from .docent import views
 
+from .models import User
+
+app.register_blueprint(views.docenten_blueprint, url_prefix='/docenten')

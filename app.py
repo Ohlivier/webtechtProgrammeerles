@@ -1,6 +1,7 @@
 from . import app
-from flask import Flask, render_template, request
+from flask import render_template, request
 from .forms import LoginForm, RegisterForm
+
 
 @app.route('/', methods=['GET'])
 def index():  # put application's code here

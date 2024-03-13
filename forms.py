@@ -13,3 +13,6 @@ class RegisterForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     username = StringField('Gebruikersnaam', validators=[DataRequired()])
     password = PasswordField('Wachtwoord', validators=[DataRequired()])
+
+class DeleteForm(FlaskForm):
+    username = StringField('Gebruikersnaam')

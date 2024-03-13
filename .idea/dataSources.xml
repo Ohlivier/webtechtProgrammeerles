@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="database" uuid="670c3132-bd64-448a-a763-0d59b1e05f9f">
-      <driver-ref>sqlite.xerial</driver-ref>
+    <data-source source="LOCAL" name="database [2]" uuid="cc0abfbd-5184-4520-8a40-500919ea0714">
+      <driver-ref>6f31ff50-e0b0-40e0-b764-38f007c8ac75</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\Olivier\Documents\JetBrains\webtechtProgrammeerles\database.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\olivi\Documents\PyCharm\webtechtProgrammeerles\database.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>

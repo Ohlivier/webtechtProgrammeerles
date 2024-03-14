@@ -10,15 +10,15 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String(), nullable=False, unique=True)
     username = db.Column(db.String(), nullable=False, unique=True)
-    password_hash = db.Column(db.String(128), nullable=False)
+    password_hash = db.Column(db.String(128))
 
     def __init__(self, email, username, password):
         self.email = email
         self.username = username
-        self.hashed_password = generate_password_hash(password)
+        self.password_hash = generate_password_hash(password)
 
     def __repr__(self):
-        return f'User: {self.username} \n Email: {self.email} \n password: {self.password}'
+        return f'User: {self.username} \n Email: {self.email} \n password: {self.password_hash}'
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)

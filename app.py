@@ -1,4 +1,4 @@
-from . import app
+from . import app, db
 from .forms import LoginForm, RegisterForm
 from .models import User
 from flask import render_template, request, redirect, url_for, flash
@@ -30,9 +30,22 @@ def login():
 def register():
     form = RegisterForm()
     if form.validate_on_submit() and request.method == 'POST':
-        return f"E-mail: {form.email.data} <br> Username: {form.username.data}, <br> Password: {form.password.data}"
+        if form.validate_on_submit():
+            print(form.password.data)
+            user = User(form.email.data,
+                        form.username.data,
+                        form.password.data)
+
+            db.session.add(user)
+            db.session.commit()
+            flash('Dank voor de registratie. Er kan nu ingelogd worden! ')
     return render_template('register.html', form=form)
 
+@app.route('/debug')
+def debug():
+    users = User.query.all()
+    print(users)
+    return render_template('debug.html', users=users)
 
 @app.route('/logout')
 @login_required

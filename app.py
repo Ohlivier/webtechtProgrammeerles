@@ -17,7 +17,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user.check_password(form.password.data) and user is not None:
             login_user(user)
-            flash('Succesvol ingelogd.')
+            # flash('Succesvol ingelogd.')
             redir = request.args.get('next')
 
             if redir is None or not redir[0] == '/':

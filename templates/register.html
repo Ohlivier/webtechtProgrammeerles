@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Register{% endblock %}
 {% block content %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
     <div class="d-flex p-2 border-dark-subtle justify-content-center">
         <form method="post">
             {{ form.hidden_tag() }}
@@ -24,8 +30,8 @@
         </form>
     </div>
     {% for field, errors in form.errors.items() %}
-<div class="alert alert-error">
-    {{ form[field].label }}: {{ ', '.join(errors) }}
-</div>
-{% endfor %}
+        <div class="alert alert-error">
+            {{ form[field].label }}: {{ ', '.join(errors) }}
+        </div>
+    {% endfor %}
 {% endblock %}

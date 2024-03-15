@@ -2,7 +2,7 @@ from . import app, db
 from .forms import LoginForm, RegisterForm
 from .models import User
 from flask import render_template, request, redirect, url_for, flash
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 
 
 @app.route('/', methods=['GET'])
@@ -23,6 +23,7 @@ def login():
             if redir is None or not redir[0] == '/':
                 redir = url_for('index')
                 return redirect(redir)
+            return redirect(url_for('index'))
     return render_template('login.html', form=form)
 
 
@@ -39,6 +40,7 @@ def register():
             db.session.add(user)
             db.session.commit()
             flash('Dank voor de registratie. Er kan nu ingelogd worden! ')
+            return redirect(url_for('register'))
     return render_template('register.html', form=form)
 
 @app.route('/debug')
@@ -52,7 +54,12 @@ def debug():
 def logout():
     logout_user()
     flash('Je bent nu uitgelogd!')
-    return redirect(url_for('home'))
+    return redirect(url_for('index'))
+
+@app.route('/welkom')
+@login_required
+def welkom():
+    return render_template('welkom.html')
 
 
 if __name__ == '__main__':

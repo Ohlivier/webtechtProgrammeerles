@@ -31,9 +31,9 @@ class Talen(db.Model):
 
 class Lessen(db.Model):
     lesID = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    userID = db.Column(db.Integer, db.ForeignKey('users.id'))
+    userID = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     docentID = db.Column(db.Integer, db.ForeignKey('users.id'))
-    talenID = db.Column(db.Integer, db.ForeignKey('talen.id'))
+    talenID = db.Column(db.Integer, db.ForeignKey('talen.id'), nullable=False)
     startDatum = db.Column(db.DateTime, default=datetime.now)
     locatie = db.Column(db.String(), nullable=False)
 
@@ -41,3 +41,4 @@ class Lessen(db.Model):
         self.lesID = lesID
         self.userID = userID
         self.talenID = talenID
+

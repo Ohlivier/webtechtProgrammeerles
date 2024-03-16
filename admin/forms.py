@@ -15,5 +15,5 @@ class SetUsername(FlaskForm):
 
 
 class SetRole(FlaskForm):
-    role = SelectField('Role', validators=[DataRequired()], choices=[('User', 'user'), ('Admin', 'admin')])
+    role = SelectField('Role', validators=[DataRequired()], choices=[('user', 'User'), ('admin', 'Admin')])
     submit3 = SubmitField('Submit')

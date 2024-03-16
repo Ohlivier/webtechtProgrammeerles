@@ -42,3 +42,5 @@ class Lessen(db.Model):
         self.userID = userID
         self.talenID = talenID
 
+    # Get username by docentID
+    # db.session.query(User).join(Lessen, User.id == Lessen.docentID).filter(User.role == 'admin').filter(Lessen.lesID == 1).first().username

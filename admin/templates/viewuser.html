@@ -1,0 +1,87 @@
+{% extends 'adminbase.html' %} {% block content %} <table class="table">
+  <tbody>
+    <tr>
+      <th scope="row">ID</th>
+      <td>{{ user.id }}</td>
+
+    </tr>
+    <tr>
+      <th scope="row">Username</th>
+      <td>{{ user.username }}</td>
+      <td>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalUsername"> Set Username </button>
+        <!-- Modal -->
+          <form method="post">
+        <div class="modal fade" id="exampleModalUsername" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body"> {{ usernameform.username }} </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="btn btn-primary">{{ usernameform.submit2 }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+              </form>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Email</th>
+      <td>{{ user.email }}</td>
+      <td>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalEmail"> Set Email </button>
+        <!-- Modal -->
+          <form method="post">
+        <div class="modal fade" id="exampleModalEmail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body"> {{ emailform.email }} </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="btn btn-primary">{{ emailform.submit1 }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+              </form>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Role</th>
+      <td>{{ user.role }}</td>
+      <td>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalRole"> Set Role </button>
+        <!-- Modal -->
+          <form method="post">
+        <div class="modal fade" id="exampleModalRole" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal tasdasditle</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body"> {{ roleform.role }} </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="btn btn-primary">{{ roleform.submit3 }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+              </form>
+      </td>
+    </tr>
+  </tbody>
+</table> {% endblock %}

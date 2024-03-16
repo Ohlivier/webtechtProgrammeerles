@@ -47,11 +47,7 @@ def register():
             return redirect(url_for('register'))
     return render_template('register.html', form=form)
 
-@app.route('/debug')
-def debug():
-    users = User.query.all()
-    print(users)
-    return render_template('debug.html', users=users)
+
 
 @app.route('/logout')
 @login_required

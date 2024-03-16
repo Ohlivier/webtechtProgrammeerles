@@ -1,4 +1,4 @@
-
+from datetime import datetime
 from . import db
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import UserMixin
@@ -24,3 +24,20 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password_hash, password)
 
 
+class Talen(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(), nullable=False, unique=True)
+
+
+class Lessen(db.Model):
+    lesID = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    userID = db.Column(db.Integer, db.ForeignKey('users.id'))
+    docentID = db.Column(db.Integer, db.ForeignKey('users.id'))
+    talenID = db.Column(db.Integer, db.ForeignKey('talen.id'))
+    startDatum = db.Column(db.DateTime, default=datetime.now)
+    locatie = db.Column(db.String(), nullable=False)
+
+    def __init__(self, lesID, userID, talenID):
+        self.lesID = lesID
+        self.userID = userID
+        self.talenID = talenID

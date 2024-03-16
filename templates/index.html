@@ -2,6 +2,12 @@
 {% block title %}{{ self._TemplateReference__context.name }}{% endblock %}
 
 {% block content %}
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
     <!-- Carousel -->
     <div id="carouselExampleCaptions" class="carousel slide">
         <div class="carousel-indicators">

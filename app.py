@@ -5,6 +5,7 @@ from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, login_required, logout_user, current_user
 
 
+
 @app.route('/', methods=['GET'])
 def index():  # put application's code here
     return render_template('index.html')
@@ -24,6 +25,9 @@ def login():
                 redir = url_for('index')
                 return redirect(redir)
             return redirect(url_for('index'))
+    elif current_user.is_authenticated:
+        flash("Je bent al ingelogd")
+        return redirect(url_for('index'))
     return render_template('login.html', form=form)
 
 

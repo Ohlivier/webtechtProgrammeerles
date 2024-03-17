@@ -5,7 +5,7 @@
         <tr>
             <th scope="col">email</th>
             <th scope="col">username</th>
-            <th scope="col">URL</th>
+            <th scope="col">Edit</th>
         </tr>
         </thead>
         <tbody>
@@ -13,7 +13,7 @@
             <tr>
                 <td>{{ user.email }}</td>
                 <td>{{ user.username }}</td>
-                <td><a href="{{ url_for('admin.gebruikers', id=user.id) }}">URL</a></td>
+                <td><a href="{{ url_for('admin.gebruikers', id=user.id) }}">EDIT</a></td>
             </tr>
         {% endfor %}
         </tbody>

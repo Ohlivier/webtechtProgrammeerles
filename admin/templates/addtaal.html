@@ -1,0 +1,70 @@
+{% extends 'adminbase.html' %}
+{% block content %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    <form method="post">
+        {{ form.hidden_tag() }}
+        {{ form.taal.label(class_='form-label mb-3') }}
+        {{ form.taal(class_='form-control mb-3') }}
+        {{ form.submit(class_='btn btn-dark') }}
+    </form>
+    {% for field, errors in form.errors.items() %}
+        <div class="alert alert-error">
+            {{ form[field].label }}: {{ ', '.join(errors) }}
+        </div>
+    {% endfor %}
+
+    <h4 class="mt-1 pt-2 border-top">Huidige talen</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Taal</th>
+            <th class="text-bg-danger">DELETE</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for taal in talen %}
+            <tr>
+                <td>{{ taal.id }}</td>
+                <td>{{ taal.name }}</td>
+                <td><!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#modal_{{ taal.id }}">
+                        DELETE TAAL
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modal_{{ taal.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    WEET JE ZEKER DAT JE DE TAAL WIL VERWIJDEREN UIT DE DATABASE? <br>
+                                    HIERDOOR WORDEN OOK ALLE LESSEN OVER DEZE TAAL VERWIJDERD
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                    <form action="{{ url_for('admin.taal', id=taal.id) }}" method="post">
+                                        {{ delete.delete(class_="btn btn-danger") }}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

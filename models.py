@@ -1,5 +1,6 @@
 from datetime import datetime
 from . import db
+from sqlalchemy.orm import relationship
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import UserMixin
 
@@ -28,6 +29,14 @@ class Talen(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(), nullable=False, unique=True)
 
+    lessen = relationship("Lessen", cascade="all, delete-orphan")
+
+    def __repr__(self):
+        return f"Taal ID: {self.id} \n Taal: {self.name}"
+
+    def __init__(self, name):
+        self.name = name
+
 
 class Lessen(db.Model):
     lesID = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -36,7 +45,6 @@ class Lessen(db.Model):
     talenID = db.Column(db.Integer, db.ForeignKey('talen.id'), nullable=False)
     startDatum = db.Column(db.DateTime, default=datetime.now)
     locatie = db.Column(db.String(), nullable=False)
-
     def __init__(self, lesID, userID, talenID):
         self.lesID = lesID
         self.userID = userID

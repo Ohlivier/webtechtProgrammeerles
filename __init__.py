@@ -13,7 +13,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
-from .models import User
+from .models import *
 
 
 @login_manager.user_loader

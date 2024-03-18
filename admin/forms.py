@@ -22,6 +22,7 @@ class SetRole(FlaskForm):
 
 class AddTaal(FlaskForm):
     taal = StringField('Taal', validators=[DataRequired(message='Taal is required')])
+
     submit = SubmitField('Voeg toe')
 
     def validate_taal(self, field):
@@ -31,3 +32,6 @@ class AddTaal(FlaskForm):
 
 class DeleteTaal(FlaskForm):
     delete = SubmitField('DELETE')
+
+class CreateCursus(FlaskForm):
+    pass

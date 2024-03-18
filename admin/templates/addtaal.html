@@ -1,5 +1,5 @@
 {% extends 'adminbase.html' %}
-{% block content %}
+{% block header %}
     {% for message in get_flashed_messages() %}
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>{{ message }}</strong>
@@ -8,7 +8,9 @@
     {% endfor %}
     <form method="post">
         {{ form.hidden_tag() }}
-        {{ form.taal.label(class_='form-label mb-3') }}
+        <h3>Taal</h3>
+        {% endblock %}
+        {% block bheader %}
         {{ form.taal(class_='form-control mb-3') }}
         {{ form.submit(class_='btn btn-dark') }}
     </form>
@@ -17,8 +19,9 @@
             {{ form[field].label }}: {{ ', '.join(errors) }}
         </div>
     {% endfor %}
-
-    <h4 class="mt-1 pt-2 border-top">Huidige talen</h4>
+{% endblock %}
+{% block content %}
+    <h4 class="mt-1 pt-2">Huidige talen</h4>
     <table class="table">
         <thead>
         <tr>

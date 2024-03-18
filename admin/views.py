@@ -49,8 +49,12 @@ def taal():
     form = AddTaal()
     delete = DeleteTaal()
     if request.method == 'POST' and request.args.get('id') is not None and delete.delete:
-        print(request.args.get('id'))
-        flash(f'Taal met ID {request.args.get("id")} is verwijderd ')
+        id = request.args.get('id')
+        print(id)
+        flash(f'Taal met ID {id} is verwijderd ')
+        taal = Talen.query.get(id)
+        db.session.delete(taal)
+        db.session.commit()
         return redirect(url_for('admin.taal'))
     if form.validate_on_submit() and request.method == 'POST':
         print(form.taal.data)

@@ -83,5 +83,12 @@ def add():
     cursussen = Lessen.query.all()
     form.docenten.choices = [(f'{naam[0]}', naam[1]) for naam in namen]
     form.talen.choices = [(f'{talen[0]}', talen[1]) for talen in talen]
+    talendict = {}
+    docentendict = {}
+    for talen in form.talen.choices:
+        talendict[int(talen[0])] = talen[1]
+    for docent in form.docenten.choices:
+        docentendict[int(docent[0])] = docent[1]
     print(form.docenten.choices)
-    return render_template('formtest.html', form=form, cursussen=cursussen)
+    return render_template('formtest.html', form=form, cursussen=cursussen, talendict=talendict,
+                           docentendict=docentendict)

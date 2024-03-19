@@ -37,7 +37,9 @@
             <th scope="col">lesID</th>
             <th scope="col">userID</th>
             <th scope="col">docentID</th>
+            <th scope="col">docentNaam</th>
             <th scope="col">talenID</th>
+            <th scope="col">talenNaam</th>
             <th scope="col">Start Datum</th>
             <th scope="col">Locatie</th>
         </tr>
@@ -48,7 +50,9 @@
                 <td>{{ cursus.lesID }}</td>
                 <td>{{ cursus.userID }}</td>
                 <td>{{ cursus.docentID }}</td>
+                <td>{{ docentendict[cursus.docentID] }}</td>
                 <td>{{ cursus.talenID }}</td>
+                <td>{{ talendict[cursus.talenID] }}</td>
                 <td>{{ cursus.startDatum }}</td>
                 <td>{{ cursus.locatie }}</td>
             </tr>

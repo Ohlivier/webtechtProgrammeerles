@@ -44,12 +44,16 @@ class Lessen(db.Model):
     userID = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     docentID = db.Column(db.Integer, db.ForeignKey('users.id'))
     talenID = db.Column(db.Integer, db.ForeignKey('talen.id'), nullable=False)
-    startDatum = db.Column(db.DateTime, default=func.now())
+    startDatum = db.Column(db.DateTime, nullable=True)
     locatie = db.Column(db.String(), nullable=False)
     def __init__(self, docentID, talenID, locatie):
         self.docentID = docentID
         self.talenID = talenID
         self.locatie = locatie
+
+    def startCourse(self, userID):
+        self.userID = userID
+        self.startDatum = func.now()
 
     # Get username by docentID
     # db.session.query(User).join(Lessen, User.id == Lessen.docentID).filter(User.role == 'admin').filter(Lessen.lesID == 1).first().username

@@ -6,6 +6,12 @@
     <p>Op deze pagina kunt u cursussen toevoegen</p>
 {% endblock %}
 {% block content %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
     <div class="container">
         <div class="row">
             <form method="post">

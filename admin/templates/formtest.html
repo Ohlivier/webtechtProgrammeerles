@@ -26,6 +26,10 @@
                         {{ form.talen(class_='form-control') }}
                     </div>
                     <div class="col-auto">
+                        {{ form.datum.label }}
+                        {{ form.datum(class_='form-control') }}
+                    </div>
+                    <div class="col-auto">
                         {{ form.locatie.label }}
                         {{ form.locatie(class_='form-control') }}
                     </div>
@@ -65,4 +69,9 @@
         {% endfor %}
         </tbody>
     </table>
+        {% for field, errors in form.errors.items() %}
+        <div class="alert alert-error">
+            {{ form[field].label }}: {{ ', '.join(errors) }}
+        </div>
+    {% endfor %}
 {% endblock %}

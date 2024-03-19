@@ -1,1 +1,70 @@
 {% extends 'dashbase.html' %}
+{% block header %}
+    <h5 class="display-5">Beschikbare cursussen</h5>
+{% endblock %}
+{% block bheader %}
+    <p>Hier zie je alle momenteel beschikbare cursussen</p>
+{% endblock %}
+{% block content %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Docent</th>
+            <th scope="col">Taal</th>
+            <th scope="col">Start Datum</th>
+            <th scope="col">Locatie</th>
+            <th scope="col">Inschrijven</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cursus in beschikbaar %}
+            <tr>
+                <td>{{ docentendict[cursus.docentID] }}</td>
+                <td>{{ talendict[cursus.talenID] }}</td>
+                <td>{{ cursus.startDatum }}</td>
+                <td>{{ cursus.locatie }}</td>
+                <td><!-- Button trigger modal -->
+                    <button type="button" class="btn btn-light btn-outline-dark" data-bs-toggle="modal"
+                            data-bs-target="#modal_{{ cursus.lesID }}">
+                        Inschrijven voor cursus {{ talendict[cursus.talenID] }}
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modal_{{ cursus.lesID }}" tabindex="-1"
+                         aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Weet u zeker dat u zich wil inschrijven voor de
+                                    cursus {{ talendict[cursus.talenID] }}?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                    <form method="post"
+                                          action="{{ url_for('dashboard.beschikbaar', id=cursus.lesID, naam=talendict[cursus.talenID]) }}">
+                                        {{ form.hidden_tag() }}
+                                        {{ form.submit(class_='btn btn-primary') }}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

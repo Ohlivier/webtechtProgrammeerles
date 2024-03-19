@@ -25,9 +25,7 @@ def get_user(user_id):
 
 
 migrate = Migrate(app, db, compare_type=True, render_as_batch=True)
-from .docent import views
 
-app.register_blueprint(views.docenten_blueprint, url_prefix='/docenten')
 from .dashboard import views
 
 app.register_blueprint(views.dashboard_blueprint, url_prefix='/dashboard')

@@ -73,7 +73,8 @@ def taal():
 def add():
     form = CreateCursus()
     if request.method == 'POST' and form.validate_on_submit():
-        cursus = Lessen(docentID=int(form.docenten.data), talenID=int(form.talen.data), locatie=form.locatie.data)
+        print(form.datum.data)
+        cursus = Lessen(docentID=int(form.docenten.data), talenID=int(form.talen.data), locatie=form.locatie.data, startDatum=form.datum.data)
         db.session.add(cursus)
         db.session.commit()
         flash("Cursus toegevoegd!")

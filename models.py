@@ -1,4 +1,3 @@
-from datetime import datetime
 from . import db
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -44,11 +43,12 @@ class Lessen(db.Model):
     userID = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     docentID = db.Column(db.Integer, db.ForeignKey('users.id'))
     talenID = db.Column(db.Integer, db.ForeignKey('talen.id'), nullable=False)
-    startDatum = db.Column(db.DateTime, nullable=True)
+    startDatum = db.Column(db.Date, nullable=True)
     locatie = db.Column(db.String(), nullable=False)
-    def __init__(self, docentID, talenID, locatie):
+    def __init__(self, docentID, talenID, startDatum, locatie):
         self.docentID = docentID
         self.talenID = talenID
+        self.startDatum = startDatum
         self.locatie = locatie
 
     def startCourse(self, userID):
@@ -57,3 +57,13 @@ class Lessen(db.Model):
 
     # Get username by docentID
     # db.session.query(User).join(Lessen, User.id == Lessen.docentID).filter(User.role == 'admin').filter(Lessen.lesID == 1).first().username
+
+
+class Inschrijvingen(db.Model):
+    inschrijvingenID = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    userID = db.Column(db.Integer, db.ForeignKey('users.id'))
+    lessenID = db.Column(db.Integer, db.ForeignKey('lessen.lesID'))
+
+    def __init__(self, userID, lessenID):
+        self.userID = userID
+        self.lessenID = lessenID

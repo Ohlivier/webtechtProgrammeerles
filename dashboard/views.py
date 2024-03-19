@@ -1,5 +1,9 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
+from .. import db
+from ..models import Lessen, User, Talen, Inschrijvingen
+from datetime import date
+from .forms import InschrijvenForm
 
 dashboard_blueprint = Blueprint('dashboard', __name__, template_folder='templates')
 
@@ -8,3 +12,34 @@ dashboard_blueprint = Blueprint('dashboard', __name__, template_folder='template
 @login_required
 def dashboard():
     return render_template('dashboard.html')
+
+
+@dashboard_blueprint.route('/beschikbaar/', methods=['GET', 'POST'])
+@login_required
+def beschikbaar():
+    if request.method == 'POST' and request.args.get('id') is not None:
+        lesid = request.args.get('id')
+        current_user_id = current_user.id
+        if db.session.query(Inschrijvingen).filter(Inschrijvingen.lessenID == lesid, Inschrijvingen.userID == current_user_id).count() == 1:
+            flash('U bent al ingeschreven voor deze cursus!')
+            return redirect(url_for('dashboard.beschikbaar'))
+        inschrijving = Inschrijvingen(userID=current_user_id, lessenID=lesid)
+        db.session.add(inschrijving)
+        db.session.commit()
+        flash(f'U hebt zich ingeschreven voor de cursus {request.args.get("naam")}')
+        return redirect(url_for('dashboard.beschikbaar'))
+    current_time = date.today()
+    beschikbare_cursussen = Lessen.query.filter(Lessen.startDatum > current_time).all()
+    namen = db.session.query(User.id, User.username).filter(User.role == 'admin').all()
+    talen = db.session.query(Talen.id, Talen.name).all()
+    docent_naam = [(f'{naam[0]}', naam[1]) for naam in namen]
+    taal_namen = [(f'{talen[0]}', talen[1]) for talen in talen]
+    talendict = {}
+    docentendict = {}
+    for talen in taal_namen:
+        talendict[int(talen[0])] = talen[1]
+    for docent in docent_naam:
+        docentendict[int(docent[0])] = docent[1]
+    form = InschrijvenForm()
+    return render_template('available.html', form=form, beschikbaar=beschikbare_cursussen, talendict=talendict,
+                           docentendict=docentendict)

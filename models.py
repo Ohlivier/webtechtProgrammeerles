@@ -33,7 +33,7 @@ class Talen(db.Model):
     lessen = relationship("Lessen", cascade="all, delete-orphan")
 
     def __repr__(self):
-        return f"Taal ID: {self.id} \n Taal: {self.name}"
+        return f"Taal ID: {self.id} \n Taal: {self.name} \n"
 
     def __init__(self, name):
         self.name = name

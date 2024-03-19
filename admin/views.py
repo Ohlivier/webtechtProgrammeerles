@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import login_required, current_user
-from ..decorators import admin_required
-from ..models import User, Talen
+from flask_login import login_required
+from .decorators import admin_required
+from ..models import User, Talen, Lessen
 from .. import db
-from .forms import SetRole, SetEmail, SetUsername, AddTaal, DeleteTaal
+from .forms import SetRole, SetEmail, SetUsername, AddTaal, DeleteTaal, CreateCursus
 
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
 
@@ -36,7 +36,8 @@ def gebruikers():
             db.session.commit()
     if request.args.get('id') is not None:
         user = User.query.get(int(request.args.get('id')))
-        return render_template('viewuser.html', user=user, emailform=emailform, usernameform=usernameform, roleform=roleform)
+        return render_template('viewuser.html', user=user, emailform=emailform, usernameform=usernameform,
+                               roleform=roleform)
     users = User.query.all()
     print(users)
     return render_template('users.html', users=users)
@@ -64,3 +65,23 @@ def taal():
         return redirect(url_for('admin.taal'))
     talen = Talen.query.all()
     return render_template('addtaal.html', form=form, talen=talen, delete=delete)
+
+
+@admin_blueprint.route('/add/', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add():
+    form = CreateCursus()
+    if request.method == 'POST' and form.validate_on_submit():
+        cursus = Lessen(docentID=int(form.docenten.data), talenID=int(form.talen.data), locatie=form.locatie.data)
+        db.session.add(cursus)
+        db.session.commit()
+        flash("Cursus toegevoegd!")
+        return redirect(url_for('admin.add'))
+    namen = db.session.query(User.id, User.username).filter(User.role == 'admin').all()
+    talen = db.session.query(Talen.id, Talen.name).all()
+    cursussen = Lessen.query.all()
+    form.docenten.choices = [(f'{naam[0]}', naam[1]) for naam in namen]
+    form.talen.choices = [(f'{talen[0]}', talen[1]) for talen in talen]
+    print(form.docenten.choices)
+    return render_template('formtest.html', form=form, cursussen=cursussen)

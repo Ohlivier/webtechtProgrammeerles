@@ -2,7 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import SelectField
 from wtforms.fields.simple import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, ValidationError
-from ..models import Talen
+from ..models import Talen, User
+from .. import db
 
 
 class SetEmail(FlaskForm):
@@ -33,5 +34,9 @@ class AddTaal(FlaskForm):
 class DeleteTaal(FlaskForm):
     delete = SubmitField('DELETE')
 
+
 class CreateCursus(FlaskForm):
-    pass
+    docenten = SelectField('Docenten', validators=[DataRequired()], choices=[], validate_choice=False)
+    talen = SelectField('Talen', validators=[DataRequired()], choices=[], validate_choice=False)
+    locatie = StringField('Locatie', validators=[DataRequired()])
+    submit = SubmitField('Submit')

@@ -1,6 +1,7 @@
 from datetime import datetime
 from . import db
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import UserMixin
 
@@ -40,15 +41,15 @@ class Talen(db.Model):
 
 class Lessen(db.Model):
     lesID = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    userID = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    userID = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     docentID = db.Column(db.Integer, db.ForeignKey('users.id'))
     talenID = db.Column(db.Integer, db.ForeignKey('talen.id'), nullable=False)
-    startDatum = db.Column(db.DateTime, default=datetime.now)
+    startDatum = db.Column(db.DateTime, default=func.now())
     locatie = db.Column(db.String(), nullable=False)
-    def __init__(self, lesID, userID, talenID):
-        self.lesID = lesID
-        self.userID = userID
+    def __init__(self, docentID, talenID, locatie):
+        self.docentID = docentID
         self.talenID = talenID
+        self.locatie = locatie
 
     # Get username by docentID
     # db.session.query(User).join(Lessen, User.id == Lessen.docentID).filter(User.role == 'admin').filter(Lessen.lesID == 1).first().username

@@ -8,19 +8,34 @@ from .forms import InschrijvenForm
 dashboard_blueprint = Blueprint('dashboard', __name__, template_folder='templates')
 
 
+def get_current_cursus():
+    if current_user.is_authenticated:
+        results = (
+            db.session.query(Inschrijvingen, Talen)
+            .filter(Inschrijvingen.userID == current_user.id)
+            .join(Lessen, Inschrijvingen.lessenID == Lessen.lesID)
+            .join(Talen, Lessen.talenID == Talen.id)
+            .all()
+        )
+        reslist = [talen.name for inschrijving, talen in results]
+        return reslist
+
 @dashboard_blueprint.route('/')
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
+    current_user_cursus = get_current_cursus()
+    return render_template('dashboard.html', cursussen=current_user_cursus)
 
 
 @dashboard_blueprint.route('/beschikbaar/', methods=['GET', 'POST'])
 @login_required
 def beschikbaar():
+    current_user_cursus = get_current_cursus()
     if request.method == 'POST' and request.args.get('id') is not None:
         lesid = request.args.get('id')
         current_user_id = current_user.id
-        if db.session.query(Inschrijvingen).filter(Inschrijvingen.lessenID == lesid, Inschrijvingen.userID == current_user_id).count() == 1:
+        if db.session.query(Inschrijvingen).filter(Inschrijvingen.lessenID == lesid,
+                                                   Inschrijvingen.userID == current_user_id).count() == 1:
             flash('U bent al ingeschreven voor deze cursus!')
             return redirect(url_for('dashboard.beschikbaar'))
         inschrijving = Inschrijvingen(userID=current_user_id, lessenID=lesid)
@@ -42,4 +57,4 @@ def beschikbaar():
         docentendict[int(docent[0])] = docent[1]
     form = InschrijvenForm()
     return render_template('available.html', form=form, beschikbaar=beschikbare_cursussen, talendict=talendict,
-                           docentendict=docentendict)
+                           docentendict=docentendict, cursussen=current_user_cursus)

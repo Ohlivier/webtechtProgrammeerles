@@ -4,6 +4,8 @@ from .decorators import admin_required
 from ..models import User, Talen, Lessen
 from .. import db
 from .forms import SetRole, SetEmail, SetUsername, AddTaal, DeleteTaal, CreateCursus
+import pathlib
+import os
 
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
 
@@ -77,6 +79,18 @@ def add():
         cursus = Lessen(docentID=int(form.docenten.data), talenID=int(form.talen.data), locatie=form.locatie.data, startDatum=form.datum.data)
         db.session.add(cursus)
         db.session.commit()
+        lesid = db.session.query(Lessen.lesID).order_by(Lessen.lesID.desc()).first()
+        talen = db.session.query(Talen.id, Talen.name).all()
+        form.talen.choices = [(f'{talen[0]}', talen[1]) for talen in talen]
+        talendict = {}
+        for talen in form.talen.choices:
+            talendict[int(talen[0])] = talen[1]
+        mapnaam = f"{talendict[int(form.talen.data)]}_{lesid[0]}"
+        basedir = pathlib.Path().resolve()
+        path = os.path.join(basedir, "cursussen", mapnaam)
+        os.mkdir(path)
+        with open(os.path.join(path, "les1.md"), "x") as file:
+            file.write("Dit is je eerste les!")
         flash("Cursus toegevoegd!")
         return redirect(url_for('admin.add'))
     namen = db.session.query(User.id, User.username).filter(User.role == 'admin').all()

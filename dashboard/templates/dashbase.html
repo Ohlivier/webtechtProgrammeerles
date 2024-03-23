@@ -20,7 +20,8 @@
                            class="list-group-item border-end-0 d-inline-block text-truncate"
                            data-bs-parent="#sidebar"><i class="bi bi-arrow-right"></i> <span>Admin</span> </a>
                     {% endif %}
-                    <a href="{{ url_for('dashboard.beschikbaar') }}" class="list-group-item border-end-0 d-inline-block text-truncate"
+                    <a href="{{ url_for('dashboard.beschikbaar') }}"
+                       class="list-group-item border-end-0 d-inline-block text-truncate"
                        data-bs-parent="#sidebar"><i class="bi bi-house"></i> <span>Cursussen</span> </a>
                     {% block courses %}
                     {% endblock %}
@@ -36,6 +37,12 @@
             <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
                class="border rounded-3 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i> Menu</a>
             <div class="page-header pt-3">
+                {% for message in get_flashed_messages() %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
                 {% block header %}
                 {% endblock %}
             </div>

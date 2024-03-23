@@ -15,16 +15,18 @@
                 <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
                     <a href="{{ url_for('index') }}" class="list-group-item border-end-0 d-inline-block text-truncate"
                        data-bs-parent="#sidebar"><i class="bi bi-house"></i> <span>Home</span> </a>
-                {% block back_courses %}
-                                        <a href="{{ url_for('dashboard.dashboard') }}" class="list-group-item border-end-0 d-inline-block text-truncate"
-                       data-bs-parent="#sidebar"><i class="bi bi-arrow-left"></i> <span>Terug</span> </a>
-                {% endblock %}
-                {% block back %}
-                {% endblock %}
+                    {% block back_courses %}
+                        <a href="{{ url_for('dashboard.dashboard') }}"
+                           class="list-group-item border-end-0 d-inline-block text-truncate"
+                           data-bs-parent="#sidebar"><i class="bi bi-arrow-left"></i> <span>Terug</span> </a>
+                    {% endblock %}
+                    {% block back %}
+                    {% endblock %}
                     {% for les in lessen %}
                         <a href="{{ url_for('lessen.lessen', lesnaam = naam, les = les) }}"
                            class="list-group-item border-end-0 d-inline-block text-truncate"
-                           data-bs-parent="#sidebar"><i class="bi bi-file-earmark"></i> <span>{{ lessen[les] }}</span> </a>
+                           data-bs-parent="#sidebar"><i class="bi bi-file-earmark"></i> <span>{{ lessen[les] }}</span>
+                        </a>
                     {% endfor %}
                     {% if current_user.is_authenticated %}
                         <p class="copyright list-group-item d-inline-block text-truncate">{{ current_user.username }}
@@ -42,6 +44,12 @@
                     <h1>Welkom bij de cursus {{ naam }}!</h1>
                 {% endblock %}
             </div>
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
             {% block bheader %}
                 <p>Links in het menu kunt u de les die u wilt volgen kiezen!</p>
 

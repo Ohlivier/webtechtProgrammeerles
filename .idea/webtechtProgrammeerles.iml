@@ -19,6 +19,7 @@
         <option value="$MODULE_DIR$/templates" />
         <option value="$MODULE_DIR$/dashboard/templates" />
         <option value="$MODULE_DIR$/admin/templates" />
+        <option value="$MODULE_DIR$/lessen/templates" />
       </list>
     </option>
   </component>

@@ -33,3 +33,7 @@ app.register_blueprint(views.dashboard_blueprint, url_prefix='/dashboard')
 from .admin import views
 
 app.register_blueprint(views.admin_blueprint, url_prefix='/admin')
+
+from .lessen import views
+
+app.register_blueprint(views.lessen_blueprint, url_prefix='/lessen')

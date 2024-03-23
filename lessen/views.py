@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required
 import markdown
+from markdown.extensions.toc import TocExtension
 import os
 from pathlib import Path
 
@@ -35,7 +36,7 @@ def lessen():
         try:
             with open(f'{cursus_dir}/{les_bestand}', 'r') as f:
                 text = f.read()
-                html = markdown.markdown(text)
+                html = markdown.markdown(text, extensions=['extra', 'codehilite', 'nl2br', 'toc'])
         except FileNotFoundError:
             flash('dit bestand bestaat niet!')
             return redirect(url_for('dashboard.dashboard'))

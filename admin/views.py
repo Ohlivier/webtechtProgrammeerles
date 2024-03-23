@@ -87,7 +87,7 @@ def add():
             talendict[int(talen[0])] = talen[1]
         mapnaam = f"{talendict[int(form.talen.data)]}_{lesid[0]}"
         basedir = pathlib.Path().resolve()
-        path = os.path.join(basedir, "cursussen", mapnaam)
+        path = os.path.join(basedir,'lessen', "cursussen", mapnaam)
         os.mkdir(path)
         with open(os.path.join(path, "les1.md"), "x") as file:
             file.write("Dit is je eerste les!")

@@ -13,6 +13,8 @@ lessen_blueprint = Blueprint('lessen', __name__, template_folder='templates')
 def lessen():
     current_directory = os.path.dirname(__file__)
     naam = request.args.get('lesnaam')
+    if len(naam) == 0:
+        return "wottefok"
     les_naam = naam.split('_')[0]
     print(naam)
     cursus_dir = os.path.join(current_directory, 'cursussen', naam)
@@ -30,5 +32,5 @@ def lessen():
         except FileNotFoundError as e:
             html = 'x'
             flash('dit bestand bestaat niet!')
-        return render_template('renderles.html', html=html)
+        return render_template('renderles.html', html=html, naam=naam)
     return render_template('lesbase.html', lessen=lessen, naam=naam)

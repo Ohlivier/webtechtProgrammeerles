@@ -105,5 +105,5 @@ def add():
     for docent in form.docenten.choices:
         docentendict[int(docent[0])] = docent[1]
     print(form.docenten.choices)
-    return render_template('formtest.html', form=form, cursussen=cursussen, talendict=talendict,
+    return render_template('addcourse.html', form=form, cursussen=cursussen, talendict=talendict,
                            docentendict=docentendict)

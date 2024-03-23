@@ -45,7 +45,6 @@
         <thead>
         <tr>
             <th scope="col">lesID</th>
-            <th scope="col">userID</th>
             <th scope="col">docentID</th>
             <th scope="col">docentNaam</th>
             <th scope="col">talenID</th>
@@ -58,7 +57,6 @@
         {% for cursus in cursussen %}
             <tr>
                 <td>{{ cursus.lesID }}</td>
-                <td>{{ cursus.userID }}</td>
                 <td>{{ cursus.docentID }}</td>
                 <td>{{ docentendict[cursus.docentID] }}</td>
                 <td>{{ cursus.talenID }}</td>

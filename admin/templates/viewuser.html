@@ -1,7 +1,7 @@
 {% extends 'adminbase.html' %} {% block content %} <table class="table">
   <tbody>
     <tr>
-      <th scope="row">ID</th>
+      <th scope="row">ID van de gebruiker</th>
       <td>{{ user.id }}</td>
 
     </tr>
@@ -84,4 +84,7 @@
       </td>
     </tr>
   </tbody>
-</table> {% endblock %}
+</table>
+<p class="border-top">De admin rol geeft de gebruiker functionaliteit om de gebruikers aan te passen en om cursussen aan te maken</p>
+
+{% endblock %}

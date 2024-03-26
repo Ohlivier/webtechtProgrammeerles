@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Sidebar</title>
-    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
 </head>
@@ -43,6 +42,7 @@
             <div class="page-header pt-3">
                 {% block header %}
                     <h1>Welkom bij de cursus {{ naam }}!</h1>
+                    {{ toc }}
                 {% endblock %}
             </div>
             {% for message in get_flashed_messages() %}

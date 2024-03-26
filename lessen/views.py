@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required
 import markdown
-from markdown.extensions.toc import TocExtension
+from markdown.extensions import codehilite, toc
 import os
 from pathlib import Path
 

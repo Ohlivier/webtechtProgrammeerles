@@ -45,11 +45,13 @@ class Lessen(db.Model):
     talenID = db.Column(db.Integer, db.ForeignKey('talen.id'), nullable=False)
     startDatum = db.Column(db.Date, nullable=True)
     locatie = db.Column(db.String(), nullable=False)
-    def __init__(self, docentID, talenID, startDatum, locatie):
+    prijs = db.Column(db.Integer(), nullable=False, default=0)
+    def __init__(self, docentID, talenID, startDatum, locatie, prijs):
         self.docentID = docentID
         self.talenID = talenID
         self.startDatum = startDatum
         self.locatie = locatie
+        self.prijs = prijs
 
     def startCourse(self, userID):
         self.userID = userID

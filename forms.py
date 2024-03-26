@@ -5,13 +5,13 @@ from .models import User
 
 
 class LoginForm(FlaskForm):
-    email = StringField('email', validators=[DataRequired()])
+    email = StringField('E-mail', validators=[DataRequired()])
     password = PasswordField('Wachtwoord', validators=[DataRequired()])
-    submit = SubmitField('Verzend')
+    submit = SubmitField('Doorgaan')
 
 
 class RegisterForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
+    email = StringField('E-mail', validators=[DataRequired(), Email()])
     username = StringField('Gebruikersnaam', validators=[DataRequired()])
     password = PasswordField('Wachtwoord', validators=[DataRequired(), EqualTo('pass_confirm', message='Bevestigd')])
     pass_confirm = PasswordField('Bevestig Wachtwoord', validators=[DataRequired()])

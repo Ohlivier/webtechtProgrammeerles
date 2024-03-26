@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField
+from wtforms import SelectField, DecimalField
 from wtforms.fields.datetime import DateField
 from wtforms.fields.simple import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, ValidationError
@@ -41,4 +41,5 @@ class CreateCursus(FlaskForm):
     talen = SelectField('Talen', validators=[DataRequired()], choices=[], validate_choice=False)
     locatie = StringField('Locatie', validators=[DataRequired()])
     datum = DateField('Start datum', validators=[DataRequired()], format='%Y-%m-%d')
+    prijs = DecimalField('Prijs', validators=[DataRequired()])
     submit = SubmitField('Submit')

@@ -5,7 +5,19 @@ from ..models import Lessen, User, Talen, Inschrijvingen
 from datetime import date
 from .forms import InschrijvenForm
 from ..cursusget import get_current_cursus
+
 dashboard_blueprint = Blueprint('dashboard', __name__, template_folder='templates')
+
+
+def has_korting():
+    if current_user.is_authenticated:
+        count = (
+            db.session.query(Inschrijvingen)
+            .filter(Inschrijvingen.userID == current_user.id).count())
+        if count >= 1:
+            return True
+        else:
+            return False
 
 
 @dashboard_blueprint.route('/')
@@ -51,5 +63,7 @@ def beschikbaar():
     for docent in docent_naam:
         docentendict[int(docent[0])] = docent[1]
     form = InschrijvenForm()
+    korting = has_korting()
+    print(korting)
     return render_template('available.html', form=form, beschikbaar=beschikbare_cursussen, talendict=talendict,
-                           docentendict=docentendict, cursussen=current_user_cursus, lessen_namen=lessen_namen)
+                           docentendict=docentendict, cursussen=current_user_cursus, lessen_namen=lessen_namen, korting=korting)

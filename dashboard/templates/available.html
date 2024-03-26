@@ -25,6 +25,7 @@
             <th scope="col">Taal</th>
             <th scope="col">Start Datum</th>
             <th scope="col">Locatie</th>
+            <th scope="col">Prijs</th>
             <th scope="col">Inschrijven</th>
         </tr>
         </thead>
@@ -35,6 +36,11 @@
                 <td>{{ talendict[cursus.talenID] }}</td>
                 <td>{{ cursus.startDatum }}</td>
                 <td>{{ cursus.locatie }}</td>
+                {% if korting %}
+                <td>€{{ (cursus.prijs*0.80)|round }},-</td>
+                {% else %}
+                <td>€{{ cursus.prijs }},-</td>
+                {% endif %}
                 <td><!-- Button trigger modal -->
                     <button type="button" class="btn btn-light btn-outline-dark" data-bs-toggle="modal"
                             data-bs-target="#modal_{{ cursus.lesID }}">

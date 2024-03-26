@@ -16,3 +16,4 @@ def get_current_cursus():
         for inschrijvingen, talen, lessen in results:
             lessen_dict[f'{talen.name}_{lessen.lesID}'] = talen.name
         return lessen_dict
+

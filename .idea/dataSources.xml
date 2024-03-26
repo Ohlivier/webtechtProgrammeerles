@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="database" uuid="d311cd30-b0e9-4b27-99ca-ba697679de0d">
-      <driver-ref>c0493550-834e-4472-af76-4ae4a71c5bc7</driver-ref>
+      <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\olivi\Documents\PyCharm\webtechtProgrammeerles\database.db</jdbc-url>
@@ -17,7 +17,7 @@
       </libraries>
     </data-source>
     <data-source source="LOCAL" name="database [2]" uuid="35672447-9ad2-47af-badc-29d94b40b3ca">
-      <driver-ref>sqlite.xerial</driver-ref>
+      <driver-ref>6f31ff50-e0b0-40e0-b764-38f007c8ac75</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\Olivier\Documents\JetBrains\webtechtProgrammeerles\database.db</jdbc-url>

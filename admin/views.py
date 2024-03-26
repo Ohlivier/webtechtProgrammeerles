@@ -76,7 +76,7 @@ def add():
     form = CreateCursus()
     if request.method == 'POST' and form.validate_on_submit():
         print(form.datum.data)
-        cursus = Lessen(docentID=int(form.docenten.data), talenID=int(form.talen.data), locatie=form.locatie.data, startDatum=form.datum.data)
+        cursus = Lessen(docentID=int(form.docenten.data), talenID=int(form.talen.data), locatie=form.locatie.data, startDatum=form.datum.data, prijs=float(form.prijs.data))
         db.session.add(cursus)
         db.session.commit()
         lesid = db.session.query(Lessen.lesID).order_by(Lessen.lesID.desc()).first()
